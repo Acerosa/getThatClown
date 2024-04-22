@@ -20,7 +20,7 @@ Get that Clown is a simple arcade-style game developed in Python using the Pygam
 - Pygame library
 
 ## Installation:
-1. Clone the repository: `git clone https://github.com/your_username/get-that-clown.git`
+1. Clone the repository: `git clone https://github.com/yourusename/getThatClown.git`
 2. Navigate to the project directory: `cd get-that-clown`
 3. Run the game: `python get_that_clown.py`
 
