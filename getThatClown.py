@@ -49,8 +49,8 @@ def inputHandler():
 
 def clickHandler(pos):
     """Handles mouse click events"""
-    mouse_x, mouse_y = pos
-    if clownRect.collidepoint(mouse_x, mouse_y):
+    mouseX, mouseY = pos
+    if clownRect.collidepoint(mouseX, mouseY):
         clickSound.play()
         increaseScore()
         updateClownVelocity()
