@@ -34,3 +34,33 @@ pygame.mixer.music.load("getThatClownAssets/ctcBackgroundMusic.wav")
 # Load images
 backgroundImage = pygame.image.load("getThatClownAssets/background.png")
 clownImage = pygame.image.load("getThatClownAssets/clown.png")
+
+
+
+# Set initial game state
+score = 0
+playerLives = playerStartingLives
+clownRect = clownImage.get_rect(center=(windowWidth // 2, windowHeight // 2))
+clownDx = random.choice([-1, 1])
+clownDy = random.choice([-1, 1])
+clownVelocity = clownStartingVelocity
+
+# Set initial HUD text
+titleText = font.render("Get that Clown", True, blue)
+scoreText = font.render("Score: " + str(score), True, yellow)
+livesText = font.render("Lives: " + str(playerLives), True, yellow)
+
+# The main game loop
+pygame.mixer.music.play(-1, 0.0)
+running = True
+while running:
+    screen.blit(backgroundImage, (0, 0))
+    screen.blit(titleText, (50, 10))
+    screen.blit(scoreText, (windowWidth - 200, 10))
+    screen.blit(livesText, (windowWidth - 200, 50))
+    screen.blit(clownImage, clownRect)
+    pygame.display.update()
+    clock.tick(fps)
+
+# End the game
+pygame.quit()
