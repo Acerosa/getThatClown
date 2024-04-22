@@ -35,7 +35,33 @@ pygame.mixer.music.load("getThatClownAssets/ctcBackgroundMusic.wav")
 backgroundImage = pygame.image.load("getThatClownAssets/background.png")
 clownImage = pygame.image.load("getThatClownAssets/clown.png")
 
+# GAME FUNCTIONALITY
+def increaseScore():
+    """Increases the player's score"""
+    global score
+    score += 1
 
+def updateClownVelocity():
+    """Increases the velocity of the clown"""
+    global clownVelocity
+    clownVelocity += clownAcceleration
+
+def decreasePlayerLives():
+    """Decreases the player's lives"""
+    global playerLives
+    playerLives -= 1
+
+
+
+
+def updateScreen():
+    """Updates the display"""
+    screen.blit(backgroundImage, (0, 0))
+    screen.blit(titleText, (50, 10))
+    screen.blit(scoreText, (windowWidth - 200, 10))
+    screen.blit(livesText, (windowWidth - 200, 50))
+    screen.blit(clownImage, clownRect)
+    pygame.display.update()
 
 # Set initial game state
 score = 0
@@ -54,11 +80,7 @@ livesText = font.render("Lives: " + str(playerLives), True, yellow)
 pygame.mixer.music.play(-1, 0.0)
 running = True
 while running:
-    screen.blit(backgroundImage, (0, 0))
-    screen.blit(titleText, (50, 10))
-    screen.blit(scoreText, (windowWidth - 200, 10))
-    screen.blit(livesText, (windowWidth - 200, 50))
-    screen.blit(clownImage, clownRect)
+    updateScreen()
     pygame.display.update()
     clock.tick(fps)
 
