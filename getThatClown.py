@@ -36,6 +36,28 @@ backgroundImage = pygame.image.load("getThatClownAssets/background.png")
 clownImage = pygame.image.load("getThatClownAssets/clown.png")
 
 # GAME FUNCTIONALITY
+
+
+def inputHandler():
+    """Handles user input"""
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            return False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            clickHandler(event.pos)
+    return True
+
+def clickHandler(pos):
+    """Handles mouse click events"""
+    mouse_x, mouse_y = pos
+    if clownRect.collidepoint(mouse_x, mouse_y):
+        clickSound.play()
+        increaseScore()
+        updateClownVelocity()
+    else:
+        missSound.play()
+        decreasePlayerLives()
+
 def increaseScore():
     """Increases the player's score"""
     global score
@@ -52,7 +74,16 @@ def decreasePlayerLives():
     playerLives -= 1
 
 
+def moveClown():
+    """Moves the clown and handles collision with screen edges"""
+    global clownRect, clownDx, clownDy
+    clownRect.x += clownDx * clownVelocity
+    clownRect.y += clownDy * clownVelocity
 
+    if clownRect.left <= 0 or clownRect.right >= windowWidth:
+        clownDx = -1 * clownDx
+    if clownRect.top <= 0 or clownRect.bottom >= windowHeight:
+        clownDy = -1 * clownDy
 
 def updateScreen():
     """Updates the display"""
@@ -80,8 +111,9 @@ livesText = font.render("Lives: " + str(playerLives), True, yellow)
 pygame.mixer.music.play(-1, 0.0)
 running = True
 while running:
+    running = inputHandler()
+    moveClown()
     updateScreen()
-    pygame.display.update()
     clock.tick(fps)
 
 # End the game
